@@ -1,5 +1,5 @@
-const FileTreeNode = ({ fileName, nodes, onSelect, path }) => {
-    const isDir = !!nodes;
+const FileTreeNode = ({ onSelect, path, fileName, nodes }) => {
+    const isDir = !nodes;
     return (
       <div
         onClick={(e) => {

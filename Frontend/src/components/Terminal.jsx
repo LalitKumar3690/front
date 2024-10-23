@@ -15,7 +15,7 @@ const Terminal = () => {
     const term = new XTerminal({
       rows: 20,
     });
-
+    term.write('Hello from \x1B[1;3;31mCodex.code\x1B[0m $ ');
     term.open(terminalRef.current);
 
     term.onData((data) => {

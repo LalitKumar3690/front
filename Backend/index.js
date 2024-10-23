@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('terminal:write', (data) => {
-        console.log('Term', data)
+        
         ptyProcess.write(data);
     })
 })

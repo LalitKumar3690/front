@@ -1,15 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 
 import Terminal from "./Terminal";
 import FileTree from "./Tree";
 import socket from "../socket";
-import AceEditor from "react-ace";
+import Editor from '@monaco-editor/react';
 
 import { getFileMode } from "../utils/getFileMode";
 
-import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/theme-github";
-import "ace-builds/src-noconflict/ext-language_tools";
+
 
 function NextPage() {
   const [fileTree, setFileTree] = useState({});
@@ -18,6 +16,16 @@ function NextPage() {
   const [code, setCode] = useState("");
 
   const isSaved = selectedFileContent === code;
+
+  const editorRef = useRef(null);
+
+  function handleEditorDidMount(editor, monaco) {
+    editorRef.current = editor;
+  }
+
+  function showValue() {
+    alert(editorRef.current.getValue());
+  }
 
   useEffect(() => {
     if (!isSaved && code) {
@@ -86,12 +94,13 @@ function NextPage() {
               {isSaved ? "Saved" : "Unsaved"}
             </p>
           )}
-          <AceEditor
-            width="100%"
-            mode={getFileMode({ selectedFile })}
-            value={code}
-            onChange={(e) => setCode(e)}
-          />
+           <button onClick={showValue}>Show value</button>
+      <Editor
+        height="90vh"
+        defaultLanguage="javascript"
+        defaultValue="// some comment"
+        onMount={handleEditorDidMount}
+      />
         </div>
       </div>
       <div className="terminal-container">
