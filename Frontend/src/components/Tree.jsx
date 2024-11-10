@@ -13,7 +13,7 @@ const FileTreeNode = ({ onSelect, path, fileName, nodes }) => {
         {nodes && fileName !== "node_modules" && (
           <ul>
             {Object.keys(nodes).map((child) => (
-              <li key={child}>
+              <li key={child} className='cursor-pointer' onClick={console.log('hello')}>
                 <FileTreeNode
                   onSelect={onSelect}
                   path={path + "/" + child}
